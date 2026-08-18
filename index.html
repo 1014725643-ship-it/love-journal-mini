@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For 张怡爽 💕</title>
+    <style>
+        /* 基础样式 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; 
+            background-color: #fffaf5; color: #4a3b3f; line-height: 1.8; 
+        }
+        .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; text-align: center; }
+        
+        /* 计时器样式 */
+        .counter-card { margin-bottom: 40px; }
+        .counter-label { font-size: 16px; color: #9e8a8d; margin-bottom: 15px; }
+        .counter-grid { display: flex; justify-content: center; gap: 10px; }
+        .counter-item { display: flex; flex-direction: column; align-items: center; min-width: 50px; }
+        .counter-number { font-size: 28px; font-weight: 700; color: #e8657a; font-variant-numeric: tabular-nums;}
+        .counter-unit { font-size: 12px; color: #9e8a8d; margin-top: 4px; }
+        .counter-since { font-size: 12px; color: #9e8a8d; margin-top: 12px; opacity: 0.7; }
+
+        /* 照片与信件切换样式 */
+        .photo-wrapper { position: relative; cursor: pointer; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(200,120,130,0.15); transition: transform 0.3s ease; margin-bottom: 20px;}
+        .photo-wrapper:active { transform: scale(0.98); }
+        .photo-wrapper img { width: 100%; display: block; }
+        .photo-hint { 
+            position: absolute; bottom: 0; left: 0; right: 0; 
+            background: rgba(0,0,0,0.4); color: #fff; padding: 12px; 
+            font-size: 14px; transition: opacity 0.3s; 
+        }
+        .photo-wrapper:hover .photo-hint { opacity: 0; }
+
+        /* 信件样式 */
+        .letter-container { 
+            display: none; text-align: left; background: #fff; padding: 30px 20px; 
+            border-radius: 16px; box-shadow: 0 4px 20px rgba(200,120,130,0.1); 
+            animation: fadeIn 0.8s ease; margin-bottom: 30px;
+        }
+        .letter-title { font-size: 20px; font-weight: 700; color: #e8657a; margin-bottom: 20px; text-align: center;}
+        .letter-content { font-size: 16px; color: #4a3b3f; text-indent: 2em; margin-bottom: 15px; }
+        .letter-sign { text-align: right; margin-top: 30px; font-weight: 600; color: #e8657a; }
+        .btn-back { 
+            display: inline-block; margin-top: 20px; padding: 10px 30px; 
+            background: #e8657a; color: #fff; border-radius: 20px; 
+            font-size: 14px; cursor: pointer; border: none; 
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 计时器部分 -->
+        <div class="counter-card">
+            <p class="counter-label">我们已经在一起</p>
+            <div class="counter-grid">
+                <div class="counter-item"><span class="counter-number" id="days">0</span><span class="counter-unit">天</span></div>
+                <div class="counter-item"><span class="counter-number" id="hours">0</span><span class="counter-unit">时</span></div>
+                <div class="counter-item"><span class="counter-number" id="minutes">0</span><span class="counter-unit">分</span></div>
+                <div class="counter-item"><span class="counter-number" id="seconds">0</span><span class="counter-unit">秒</span></div>
+            </div>
+            <p class="counter-since">自 2026年5月27日 21:00 起</p>
+        </div>
+
+        <!-- 照片部分（点击后隐藏，显示信件） -->
+        <div id="photoView" class="photo-wrapper" onclick="showLetter()">
+            <img src="hezhao.jpg" alt="我们的合照">
+            <div class="photo-hint">💌 点击照片，查收专属信件</div>
+        </div>
+
+        <!-- 信件部分 -->
+        <div id="letterView" class="letter-container">
+            <div class="letter-title">To 张怡爽同学</div>
+            <div class="letter-content">决定写这封信的时候，我就开始构思，到底怎么写才能写到你的心里去？到底怎么写才能让人眼前一亮？终于我决定开始写了，不是因为想好了，而是因为我突然觉得，这样的信是不是没有必要那么严肃呢？我就像聊天一样到哪写到哪好了。</div>
+            <div class="letter-content">其实在我眼里，这个世界就像一个大型的生存模拟游戏一样，我觉得我就是为数不多的主角，没必要刻意去将就，去迁就其他的NPC。大学里我没有遇到和我一样的玩家，我习惯了一个人生活，一个人吃饭，一个人处理所有事，一个人消化所有的情绪，平平淡淡，没什么惊喜，也没什么意外。直到你的出现，我才明白，原来有人惦记，有人偏爱的感觉，才是这个生存游戏里最有意思的副本。（内心os:遇到真人玩家了）。</div>
+            <div class="letter-content">和你在一起的这些日子，说长不长，说短不短，但是，我不再是那个凡事无所谓、我行我素的人，或者说我觉得我是一个没心没肺的人。我的心里生活里多了一个最惦记、最想珍惜的你。对于我这样的人来说，有一个能吐露心声的人，是一件可遇不可求的事情，所以我非常珍惜。</div>
+            <div class="letter-content">你还记不记得之前我们几个人一起玩三国杀的时候，孔zy把刘yt喊来，但是刘yt就一直吵吵，我就一直在攻击刘yt，刘yt说让你说说我，我当时以为你可能会随便打两句哈哈，或者就不吭声。我完全没想到你会帮我说话。从小到大我的身后都是空无一人，也习惯了身后空无一人的感觉，我学会了任何问题都自己解决，解决不了的自己承受。那次你那几句话，我真的很有感触，感觉要被暖融化了。我觉得这就是你对于我而言的魅力所在，我感觉我身后是有人的。</div>
+            <div class="letter-content">所以你经常问我到底喜欢你什么，这就是很重要的原因之一。说实话，我并不擅长用语言去表述感情或者感受，所以每次我都用那句经典台词，爱一个人不需要理由。而这其实是一个闭环，因为在我眼里，喜欢一个人的理由我没办法用语言去表达，所以我觉得不需要理由。嗯……可能有点绕，不过其实以前我也尝试着和你解释过，我说，我觉得我们都是真真切切的在感受世界的人，喜欢什么就大胆尝试，哪怕是一瓶子不满半瓶子晃荡，对于我们自己来说，这都是我们独有的生命体验。</div>
+            <div class="letter-content">所以我简直是抽到保底了，你可爱、温柔，会有小情绪，会和驴一样犟，会黏着我，也会默默包容我的缺点和不足。我知道我不是一个百分百完美的男朋友，我会粗心，会嘴笨，不会说太多好听的情话，有时候会忙起来忽略你的情绪，也会有幼稚，不够成熟的时候。但你从来不会苛责我，会耐心陪着我，指出我的小毛病。你给我的生活也带来了很多不一样的体验，我深深刻刻见识到了夜猫子的生活，居然真的有人能每天晚上熬到四五点，然后一直睡到中午；居然真的有人能一天只吃一顿饭，甚至忘了要吃饭这件事；居然真的有比我还挑食的人。在我眼里要折寿的事情居然在你这里变得这么平常，相比之下我感觉我才是人机啊。</div>
+            <div class="letter-content">我记得我们刚认识就是在去年那个高校棋类比赛的时候，其实吧，当时你化了很浓的妆，应该还喷了香水，当时第一印象没那么好，主要是以前看的大型比赛不管是象棋还是围棋，那些年轻的女棋手基本都不化妆。后来变得熟悉了我记得是因为有次玩完狼人杀之后回宿舍，然后咱俩一直在聊天，刚开始是在复盘，后来就又聊了好多乱七八糟的。再后来，你说你想学下象棋，我马上接话说我来我来，我陪你下。当时其实真是阴差阳错，当时一是棋瘾犯了想下，不然我可能就继续跟他们玩去了；二是我平时也不怎么看朋友圈，也不知道你当时并不是单身，不然我一样不会接话茬。我现在感觉真是冥冥之中自有安排。</div>
+            <div class="letter-content">后来我的心路历程其实很复杂，我挑几个重要的节点给你讲讲吧。起因是那次咱俩下围棋，然后程y有意无意的说了你有男朋友了，当时心里是很疑惑的，就是你要学象棋的话找它完全就够了啊，为啥还要找我？我觉得可能是跟他学围棋了，所以当时咱俩下围棋我就决定下死手了。再到后来，就是我从港区北站徒步到双鹤湖南站那次了，那天晚上除了听歌就是和你聊天了，我当时感觉真的很暖，也是第一次有了想要霸占这种温暖的念头。不过这个念头很快就打消了，因为我不想当牛头人，也没那个实力当牛头人，嗯对。再后来就是有次我们在社团玩4399的时候，你在我耳边吹气，当时我心里也是在想你都有男朋友了，所以选择了沉默。当时我还意识到玩4399这件事本身就是越界的行为，所以选择了沉默，但是那种念头就遏制不住了。嗯……后来我觉得我们的关系是暧昧的，一直到你五一的时候把我删掉了，我当时心情是五味杂陈，后来把你加回来了就直接表明心意，因为我当时猜测，你觉得都已经暗示这么明显了我还无动于衷，想要及时止损什么的，所以我当时是很清醒的（我喝啤酒根本喝不醉）。所以我猜对了吗？哈哈现在也不重要了。重要的是后来我们在一起了，我觉得这就是一个转折点了。</div>
+            <div class="letter-content">我觉得跟你在一起我整个人是很松弛的，和我平常在外的那种松弛不一样，我可以做最真实的自己，不用害怕自己不够好。好了上一句话可以忽略，刚开始确认关系的时候我的状态可以用提心吊胆来形容了，刚才提到了我觉得你会包容我的缺点，我担心你真的是在包容我而不是觉得不在意或者可以接受，所以我总是在尽力让自己表现得完美一些。你问我喜欢你什么，但是我却不敢这么问你，因为我害怕你突然反应过来，觉得这个人也没什么优点。嗯……其实也没那么别扭，简单来说就是有点放不开。不过后来相处下来慢慢的就放得开了，我们可以安安静静待在一起散步，也可以叽叽喳喳聊很久的废话，我们可以一起吃小吃街，也可以为一件小事争辩来争辩去，我越来越相信我们都不会轻易放开彼此的手。我喜欢体验很多新鲜的事物，所以生命总会伴随着无数的变数，我习惯了这种充满变数的感觉，所以这种踏实稳定的感觉对我来说是可遇不可求的。</div>
+            <div class="letter-content">我很喜欢我们之间的相处模式，平平淡淡却格外温暖。不用刻意浪漫，不用刻意仪式感。我们都有很多不同的爱好，总能在对方身上找到乐趣。我喜欢和你并肩走路，喜欢牵着你的手，喜欢看着你笑的样子，喜欢被你依赖、被你需要的感觉。我只希望我们可以久一点，再久一点。</div>
+            <div class="letter-content">最后，我想跟你说，谢谢你出现在我的生命里，谢谢你温柔了我的岁月，治愈了我的孤独，谢谢你坚定不移的爱着我。我不喜欢许太多充满变数的承诺，但我此时此刻，希望的是以后每个七夕节都是和你在一起过的！</div>
+            <div class="letter-content">最后用我很喜欢的一段歌词来结束吧：<br><br>爱你并不是巧合<br>万年只有唯一一个<br>遇上你的那一刻<br>改变了所有规则<br>让我描述你的美<br>让我擦掉你的泪<br>有我安慰你入睡<br>你是我最珍贵<br>这个世界 谁知未来<br>你我之间 非常的时代<br>我们的爱 是否会在<br>I just wanna tell you girl oh<br>Maybe the sun won't shine<br>Maybe the rain won't fall<br>But maybe our love will find a way<br>And rise above it all<br>Maybe there comes a day<br>When all the skies turn grey<br>Maybe today our love can fly high<br>You and I will soar<br>Everybody's talking bout how to stop<br>Everybody's talking bout where to start<br>Everybody's talking straight from the heart<br>Everybody's talking everybody's talking about it<br><br>——《天气先生》方大同</div>
+            <div class="letter-sign">永远爱你的男朋友</div>
+            <div style="text-align: center;"><button class="btn-back" onclick="showPhoto()">返回合照</button></div>
+        </div>
+    </div>
+
+    <script>
+        // 在一起的时间：2026年5月27日 21:00
+        const TOGETHER_SINCE = new Date('2026-05-27T21:00:00');
+
+        // 计时器逻辑
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - TOGETHER_SINCE;
+            if (diff < 0) return;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+        updateCounter();
+        setInterval(updateCounter, 1000);
+
+        // 照片与信件切换逻辑
+        function showLetter() {
+            document.getElementById('photoView').style.display = 'none';
+            document.getElementById('letterView').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function showPhoto() {
+            document.getElementById('letterView').style.display = 'none';
+            document.getElementById('photoView').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
